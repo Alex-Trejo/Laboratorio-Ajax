@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Pokemon</h1>
+    <input type="text" id="search" placeholder="Buscar pokemon">
+    <div class="button-container">
+        <button id="search-button" data-context="name">Buscar</button>
+        <button id="clear-button">Limpiar</button>
+        <button id="random-button">Buscar Aleatorio</button>
+        <button id="search-by-id-button" data-context="id">Buscar por ID</button>
+        <button id="search-by-name-button" data-context="name">Buscar por Nombre</button>
+        <button id="search-by-type-button" data-context="type">Buscar por Tipo</button>
+        <button id="search-by-ability-button" data-context="ability">Buscar por Habilidad</button>
+    </div>
+    <div id="pokemon"></div>
+    <div id="spinner" style="display: none;">Cargando...</div>
+    <script src="app.js"></script>
+</body>
+</html>
