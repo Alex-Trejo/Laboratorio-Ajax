@@ -16,9 +16,15 @@ document.querySelectorAll('.buttons').forEach(button => {
 });
 
 function handleSearch(context, search) {
+    if (!search) {
+        alert('Por favor introduzca un valor');
+        return;
+    }
     const spinner = document.getElementById('spinner');
     spinner.style.display = 'block';
-
+    setTimeout(function() {
+        spinner.style.display = 'none';
+    }, 5000);
     let url;
     if (context === 'name' || context === 'id') {
         url = `https://pokeapi.co/api/v2/pokemon/${search}`;
@@ -37,7 +43,9 @@ function handleSearch(context, search) {
                 return response.json();
             })
             .then(data => {
-                spinner.style.display = 'none';
+                setTimeout(function() {
+                    spinner.style.display = 'none';
+                }, 1000);
                 if (context === 'name' || context === 'id') {
                     displayPokemon(data);
                 } else if (context === 'type' || context === 'ability') {
@@ -46,11 +54,15 @@ function handleSearch(context, search) {
             })
             .catch(error => {
                 showError(error.message);
-                spinner.style.display = 'none';
+                setTimeout(function() {
+                    spinner.style.display = 'none';
+                }, 5000);
             });
     } else {
         showError('Contexto de búsqueda no válido');
-        spinner.style.display = 'none';
+        setTimeout(function() {
+            spinner.style.display = 'none';
+        }, 5000);
     }
 }
 
