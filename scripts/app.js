@@ -1,4 +1,6 @@
-document.querySelectorAll('.button-container button').forEach(button => {
+const pokemonImage = document.querySelector('.pokemon__image');
+
+document.querySelectorAll('.buttons').forEach(button => {
     button.addEventListener('click', (event) => {
         const context = event.target.getAttribute('data-context');
         const search = document.getElementById('search').value.toLowerCase();
@@ -62,27 +64,30 @@ function fetchPokemon(search) {
 }
 
 function displayPokemon(data) {
-    const pokemon = document.getElementById('pokemon');
+    const pokemon = document.getElementById('pokemon__data');
     pokemon.innerHTML = `
-        <h2>${data.name}</h2>
-        <img src="${data.sprites.front_default}" alt="${data.name}">
+    
+        
+        <img class="pokemon__image" src="${data.sprites.front_default}" alt="${data.name}">
+        <section class="pokemon-datas">
+        <h2 class="pokemon__name">${data.name}</h2>
         <p>Experiencia base: ${data.base_experience}</p>
         <p>Altura: ${data.height}</p>
         <p>Orden: ${data.order}</p>
         <p>Peso: ${data.weight}</p>
         <p>Habilidad: <br>${data.abilities.map(a => a.ability.name).join('<br> ')}</p>
+        </section>
     `;
 }
-
 function displayPokemonList(pokemonList, context) {
-    const pokemon = document.getElementById('pokemon');
+    const pokemon = document.getElementById('pokemon__container');
     pokemon.innerHTML = `<h2>Pokemones con ${context}</h2>`;
     pokemonList.forEach(p => {
         fetch(p.pokemon.url)
             .then(response => response.json())
             .then(data => {
                 pokemon.innerHTML += `
-                    <div>
+                    <div class="container">
                         <h3>${data.name}</h3>
                         <img src="${data.sprites.front_default}" alt="${data.name}">
                     </div>
@@ -92,11 +97,21 @@ function displayPokemonList(pokemonList, context) {
 }
 
 function clearResults() {
-    document.getElementById('pokemon').innerHTML = '';
+    document.getElementById('pokemon__data').innerHTML = '';
+    document.getElementById('pokemon__container').innerHTML = '';
     document.getElementById('search').value = '';
 }
 
 function showError(message) {
-    const pokemon = document.getElementById('pokemon');
+    const pokemon = document.getElementById('pokemon__data');
     pokemon.innerHTML = `<p style="color: red;">${message}</p>`;
 }
+
+
+
+document.getElementById('redirectButton').addEventListener('click', function() {
+    window.location.href = 'filters.html';
+});
+
+
+
